@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SokobanController">
+   <children>
+      <MenuBar fx:id="MenuBar" layoutY="2.0" prefHeight="25.0" prefWidth="156.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Select Level">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Level 1" />
+                  <MenuItem mnemonicParsing="false" text="Level 2" />
+                  <MenuItem mnemonicParsing="false" text="Level 3" />
+                  <MenuItem mnemonicParsing="false" text="Level 4" />
+                  <MenuItem mnemonicParsing="false" text="Level 5" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="560.0" layoutX="592.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="592.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#403d00" />
+                  <Stop color="#ab9400" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="56.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="792.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#ab9400" />
+                  <Stop color="#ab9400" offset="0.007662835249042145" />
+                  <Stop color="#a15703" offset="0.17904965043251556" />
+                  <Stop color="#403d00" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <ButtonBar layoutX="634.0" layoutY="30.0" prefHeight="40.0" prefWidth="118.0" AnchorPane.rightAnchor="40.0">
+        <buttons>
+          <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#resetLevel" prefHeight="25.0" prefWidth="125.0" text="Reset Level" />
+        </buttons>
+      </ButtonBar>
+      <Text layoutX="7.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sokoban" textAlignment="CENTER" wrappingWidth="184.13671875">
+         <font>
+            <Font name="Lucida Bright Regular" size="36.0" />
+         </font>
+      </Text>
+      <TextField alignment="CENTER" editable="false" layoutX="592.0" layoutY="80.0" opacity="0.5" prefHeight="25.0" prefWidth="200.0" text="Level" AnchorPane.bottomAnchor="436.0" AnchorPane.leftAnchor="592.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+         <font>
+            <Font name="Verdana" size="34.0" />
+         </font>
+      </TextField>
+      <TextField alignment="CENTER" editable="false" layoutX="592.0" layoutY="325.0" opacity="0.5" prefHeight="25.0" prefWidth="200.0" text="Total Moves" AnchorPane.bottomAnchor="206.0" AnchorPane.leftAnchor="592.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="325.0">
+         <font>
+            <Font name="Verdana" size="27.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="MoveNum" alignment="CENTER" layoutX="592.0" layoutY="368.0" opacity="0.5" prefHeight="25.0" prefWidth="200.0" text="Move #" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="592.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="368.0">
+         <font>
+            <Font name="Verdana" size="28.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="LevelNum" alignment="CENTER" layoutX="592.0" layoutY="137.0" opacity="0.5" prefHeight="25.0" prefWidth="200.0" text="Level #" AnchorPane.bottomAnchor="379.0" AnchorPane.leftAnchor="592.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
+         <font>
+            <Font name="Verdana" size="34.0" />
+         </font>
+      </TextField>
+      <VBox fx:id="LevelArea" layoutY="80.0" prefHeight="503.0" prefWidth="592.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="80.0" />
+   </children>
+</AnchorPane>
