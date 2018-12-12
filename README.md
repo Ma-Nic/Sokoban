@@ -13,4 +13,7 @@ v0.2
   - fxml code (not working)
   - updated folder structure
   
-  
+ v0.3
+  - Fixed fxml loading issue
+  - Added more menu options to game window
+  - Created fxid's for known GUI interaction
