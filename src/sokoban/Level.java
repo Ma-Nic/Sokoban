@@ -1,6 +1,6 @@
-/* Matt Nicol
- * OOP Sokoban v0.6
- * 09/01/19
+/* Matt Nicol - 09001885
+ * UINH17135 - OOP Sokoban v0.7
+ * 10/01/19
  * Eclipse V2018-09 4.9.0 
  */
 
@@ -11,104 +11,114 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 
 public class Level {
 
-
 	private static final String MAP_LEVEL_PATH = "maps";	// Declare maps folder path, constant
 	
-	protected MapElement mapMatrix[][];				// Declare multi array for storing the map
-	protected Coord mapDimensions = new Coord();	// Create map and keeper coord objects
-	protected Coord keeperCrd = new Coord();
-	protected Coord cratesCrd[];					// Declare array for storing crate coords
-	protected int currMoves;						// Declare current moves and cell size variables
-	protected int cellSize;
+	private MapElement[][] map = new MapElement[25][15];		// Declare multi-array to store map characters
+	GridPane playArea = new GridPane();
+	Image tileTexture;
 
+	Wall wall = new Wall();
+	Coord coord = new Coord();
+	Crate crate = new Crate();
+	Diamond diamond = new Diamond();
+	Tile tile = new Tile();
+	WarehouseKeeper keeper = new WarehouseKeeper();
 	
-	public Level()		// Constructor, initialise variables to 0
+	
+	public Level()
 	{
-		mapDimensions.setX(0);
-		mapDimensions.setY(0);
-		keeperCrd.setX(0);
-		keeperCrd.setY(0);;
-		currMoves = 0;
+		
 	}
 	
-	/**
-	 * @param levelSelected Passes the level selected from SokobanGame
-	 */
-	public TileLayer loadLevel(String levelSelected) {
-
-		// Create a buffered reader to read characters from the level file
-	    FileReader fileInput = null;
-	    BufferedReader fileIn = null;
-	    LinkedList<String> cells = new LinkedList<String>();
-	    ListIterator<String> cells_itr;
-	    currMoves = 0;
-	    
-		//Catch exceptions when reading the file(s)
-		try 
+	
+	public void loadLevel(String levelSelected)
+	{
+		String filePath = MAP_LEVEL_PATH + "/" + levelSelected;
+	
+		try (BufferedReader fileIn = new BufferedReader(new FileReader(filePath)))
 		{
-			// Add map path to selected level
-			fileInput = new FileReader(MAP_LEVEL_PATH + "/" + levelSelected + ".txt");			
-		    fileIn = new BufferedReader(fileInput);
+		    int x = 0;
+		    int y = 0;  
+			String input;
 			
-			// Loop through level file to read all lines, add to array
-		      String input;
-		      for (int i = 0; (input = fileIn.readLine()) != null; i++) {
-		        if (input.length() > mapDimensions.getX()) {
-		          mapDimensions.setX(input.length());
-		        }
-		        cells.add(input);
-		      }
-		      mapDimensions.setY(cells.size());
-		      mapMatrix = new MapElement[mapDimensions.getX()][mapDimensions.getY()];
+			// Loop through level file to read all lines, add to Map Element array
+		    while ((input = fileIn.readLine()) != null) 
+		    {   			  
+		    	System.out.println(input);
 
-//		       flagArray = new int[mapDimensions.getX()][mapDimensions.getY()];
-//		       int i, j;
-//		       for (i = 0; i < mapDimensions.getY(); i++) {
-//		        for (j = 0; j < mapDimensions.getX(); j++) {
-//		        	flagArray[j][i] = 0;
-//		        }
-		      
-		      
-		      
-		 } 	catch (FileNotFoundException fnfe) {	// Catch error if file is not found
-			fnfe.printStackTrace();
-		 }	catch (IOException e){		// Catch error for any problem reading a line from the file
+		    	for (int i = 0; i < input.length(); i++) {
+		    	  char mapIcon = input.charAt(i);
+	                  switch (mapIcon) {			// Switch case while reading file dependent on what character is found
+	                  	  case ' ': 		//tile	                  		
+	                  		  tile.createElement(x, y);
+	                  		  tileTexture = tile.getImage();
+	                  		  playArea.add(new ImageView(tileTexture), x, y);
+	                  		  setMapElmt(x, y, tile);
+	                  		  break;
+	                      case 'X':			//wall
+	                          wall.createElement(x, y);
+	                  		  tileTexture = wall.getImage();
+	                  		  playArea.add(new ImageView(tileTexture), x, y);
+	                          setMapElmt(x, y , wall);
+	                          break;
+	                      case '.':			//diamond	                          
+	                          diamond.createElement(x, y);
+	                  		  tileTexture = diamond.getImage();
+	                  		  playArea.add(new ImageView(tileTexture), x, y);
+	                          setMapElmt(x, y, diamond);
+	                          break;
+	                      case '*':			//crate
+	                          crate.createElement(x, y);
+	                  		  tileTexture = crate.getImage();
+	                  		  playArea.add(new ImageView(tileTexture), x, y);
+	                          setMapElmt(x, y, crate);
+	                          break;
+	                      case '@':	        //warehouseKeeper
+	                          keeper.createElement(x, y);
+	                  		  tileTexture = keeper.getImage();
+	                  		  playArea.add(new ImageView(tileTexture), x, y);
+	                          setMapElmt(x, y, keeper);
+	                          break;
+	                      default:
+	                          System.out.println("Invalid character");
+	                          System.exit(0);		    			  
+	                  }	//END switch case
+
+	                    x++;            // Every loop, increase x and y to fit within the grid
+	                    if (x >= input.length()) 
+	                    {
+	                        y++;
+	                        x = 0;
+	                    }
+	                  
+		    	  } //END for loop
+		    } //END while loop
+		    setPlayArea(playArea);
+		
+		}	catch (FileNotFoundException fnfe) {
+				fnfe.printStackTrace();
+		}	catch (IOException e) {
 			e.printStackTrace();
-		}			
-	}	//END of loadLevel
-	
-	
-	public Coord getDimensions() 	// Get map dimensions
-	{
-	    return mapDimensions;
-	}
+		}	//END try catch	
+		
+	}	//END Level loadLevel
 
-	public int getColCount() 		// Get X count
-	{ 
-		int X = mapDimensions.getX();
-		return X;
-	}
-
-	public int getRowCount()		//Get Y count
-	{ 
-		int Y = mapDimensions.getY();
-		return Y;
-	}
-	
-	public int getMoves() 			// Get move count
+	public void setMapElmt(int x, int y, MapElement mapElement) 
 	{
-		return currMoves;
+	       map[x][y] = mapElement;
 	}
 	
-	
-	
+	public void setPlayArea(GridPane pArea)
+	{
+		SokobanController.LevelArea = pArea;
+	}
 	
 
 }	//END of Level

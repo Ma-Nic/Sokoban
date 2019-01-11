@@ -1,6 +1,6 @@
-/* Matt Nicol
- * OOP Sokoban v0.6
- * 09/01/19
+/* Matt Nicol - 09001885
+ * UINH17135 - OOP Sokoban v0.7
+ * 10/01/19
  * Eclipse V2018-09 4.9.0 
  */
 
@@ -56,11 +56,12 @@ public class SokobanController {
     private TextField LevelNum;
 
     @FXML
-    private GridPane LevelArea;
-
+    public static GridPane LevelArea;
+    
+    
     @FXML
     void closeGame(ActionEvent event) {
-    	
+    System.exit(0);	
     }
 
     @FXML

@@ -1,6 +1,6 @@
-/* Matt Nicol
- * OOP Sokoban v0.3
- * 12/12/18
+/* Matt Nicol - 09001885
+ * UINH17135 - OOP Sokoban v0.7
+ * 10/01/19
  * Eclipse V2018-09 4.9.0 
  */
 
@@ -35,8 +35,9 @@ public class SokobanDriver extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
-		
-		
+
+
+
 
 	}
 }

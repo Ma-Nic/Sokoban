@@ -1,6 +1,6 @@
-/* Matt Nicol
- * OOP Sokoban v0.6
- * 09/01/19
+/* Matt Nicol - 09001885
+ * UINH17135 - OOP Sokoban v0.7
+ * 10/01/19
  * Eclipse V2018-09 4.9.0 
  */
 
@@ -8,13 +8,14 @@
 
 package sokoban;
 
-import java.awt.image.BufferedImage;
+import javafx.scene.image.Image;
 
 
 
 public class Diamond extends MapElement {
 	
 	private boolean hasCrate = false;
+    Coord diamondCrd = new Coord();
 	
 	public Diamond() 
 	{		
@@ -25,7 +26,7 @@ public class Diamond extends MapElement {
      * @return Return loaded diamond image
      */
 	@Override
-    public BufferedImage getImage() 
+    public Image getImage() 
 	{
     	return ICON_DIAMOND;
     }
@@ -50,5 +51,15 @@ public class Diamond extends MapElement {
 	{
 		return hasCrate;
 	}
+	
+	
+    /**
+     * Set Diamond coordinates
+     */
+	public void createElement(int x, int y) 
+    {
+        diamondCrd.setX(x);
+        diamondCrd.setY(y);
+    }
 	
 }	//END of Diamond
